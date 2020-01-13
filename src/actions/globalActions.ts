@@ -1,7 +1,7 @@
 import {API_ERROR, API_ERROR_RESET} from '../constants/globalConstants';
 import {hashHistory} from '../helper';
 
-export const setError = (statusCode, errorMessage = '') => ({
+export const setError = (statusCode: any, errorMessage = '') => ({
   type: API_ERROR,
   code: statusCode,
   message: errorMessage,

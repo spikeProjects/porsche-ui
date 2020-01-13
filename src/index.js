@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {
-  getToken,
+  getSMAMOToken,
+  fetchAccount,
   asyncActionCreator,
   fetchRoleAssetDigest,
 } from './actions'
@@ -16,15 +17,18 @@ class Welcome extends Component {
   render() {
     return <div>
       <h2>Welcome to Porsche UI react
-        <img className="what" src={require('./assets/svg/react.svg')} />
-        <img className="here" src={require("./assets/images/image.jpg")} />
+        <img className="what" src={require('./assets/svg/add.svg')} />
+        <img className="here" src={require("./assets/images/porscheIcon.png")} />
       </h2>
     </div>
   }
 }
 
 export default {
-  getToken,
+  // actions
+  getSMAMOToken,
+  fetchAccount,
+
   asyncActionCreator,
   fetchRoleAssetDigest,
   PorMenu,

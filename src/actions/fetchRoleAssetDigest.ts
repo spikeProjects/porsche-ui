@@ -3,8 +3,8 @@ import {GET_ROLE_ASSET_DIGEST, FETCH_MENU_ASSET, PATH_ALL} from '../constants/na
 import {getPath, getMenu} from '../utils/common';
 import {api} from "../helper";
 
-export const digestRoleAssetsData = (origin, dispatch, after) => {
-  let data = !!after ? after : origin.map((item)=>{
+export const digestRoleAssetsData = (origin: any, dispatch: any, after?: any) => {
+  let data = !!after ? after : origin.map((item: any)=>{
     return Object.assign({},{
       assetCode: item.clientInfo.clientCode,
       assetName: item.clientInfo.clientName,
@@ -23,8 +23,8 @@ export const digestRoleAssetsData = (origin, dispatch, after) => {
   window.localStorage.setItem(MENU_ASSET_NAME,JSON.stringify(getMenu(data)));
 };
 
-export const fetchRoleAssetDigest = params => dispatch => {
-  return api.get('/ss-usercenter/api/user/roleAsset/group/digest',params).then(res => {
+export const fetchRoleAssetDigest = (params: any) => (dispatch: any) => {
+  return api.get('/ss-usercenter/api/user/roleAsset/group/digest',params).then((res: any) => {
     if(res.code==='0'){
       digestRoleAssetsData(res.data, dispatch);
     }

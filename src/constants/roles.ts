@@ -7,6 +7,22 @@ const PCS_SUPERVISOR = 'ROLE_PCS_SUP';
 const PCS_AGENT = 'ROLE_PCS_AGENT';
 const PCN_CONNECT = 'ROLE_PCN_CONNECT';
 const NOT_AUTHENTICATE = 'not authenticate';
+const DEALER_M = 'DEALER_M';
+// TODO
+const SP = 'SP';
+const PCN = 'PCN';
+const WAREHOUSE = 'WAREHOUSE';
+const PCS = 'PCS';
+const PCS_M = 'PCS_M';
+
+const PCN_NAME = '管理员';
+const DEALER_ROLE_NAME = '经销商代表';
+const DEALER_M_ROLE_NAME = '经销商经理';
+const SP_ROLE_NAME = '服务供应商';
+const WAREHOUSE_ROLE_NAME = '仓库';
+const PCS_ROLE_NAME = '客户服务';
+const PCS_M_ROLE_NAME = '客服经理';
+
 
 const ROLES = {
   PCS: 'PCS',   //客服
@@ -54,3 +70,34 @@ export default {
 
     ROLES
 };
+
+export const getRoleName = (role: any)=>{
+    let roleName;
+    switch (role) {
+    case PCN:
+      roleName = PCN_NAME;
+      break;
+    case DEALER:
+      roleName = DEALER_ROLE_NAME;
+      break;
+    case DEALER_M:
+      roleName = DEALER_M_ROLE_NAME;
+      break;
+    case SP:
+      roleName = SP_ROLE_NAME;
+      break;
+    case WAREHOUSE:
+      roleName = WAREHOUSE_ROLE_NAME;
+      break;
+    case PCS:
+      roleName = PCS_ROLE_NAME;
+      break;
+    case PCS_M:
+      roleName = PCS_M_ROLE_NAME;
+      break;
+    default:
+      roleName = '';
+      break;
+    }
+    return roleName;
+  };

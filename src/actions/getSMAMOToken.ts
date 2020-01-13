@@ -1,19 +1,19 @@
 import {message} from 'antd';
 import {api, queryObject} from "../helper";
 import {USER_TOKEN, USER_CODE, CODE_TOLEN, USER_ID, USER_CLIENT_ID, FETCH_MENU_ASSET} from '../constants/navigationConstants';
-import {fetchRoleAssetDigest, digestRoleAssetsData} from '.';
+import {fetchRoleAssetDigest, digestRoleAssetsData} from './fetchRoleAssetDigest';
 import {titleCase} from '../utils/common';
 const local = window.localStorage;
 
 const clientId = 'PC019802';
 const userCode = local.getItem(USER_CODE);
 let jsonStr = undefined;
-export const getToken =()=> dispatch  => {
+export const getSMAMOToken =()=> (dispatch: any)  => {
   const sessionCode = queryObject().code;
 
   const getter = function() {
     // TODO: S:smamo change
-    api.get("/charging-service/permission/token/"+sessionCode).then(res => {
+    api.get("/charging-service/permission/token/"+sessionCode).then((res: any) => {
       const {code, data ,message:msg}=res;
       if(code==='0'){
         dispatch({

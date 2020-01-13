@@ -2,7 +2,7 @@ import moment from 'moment';
 const dateFormat = 'YYYY-MM-DD';
 const dateTimeFormat = 'YYYY-MM-DD HH:mm:ss';
 
-export const sortTableFunc=(data,params,sorter,name='orderBy')=>{
+export const sortTableFunc=(data: any,params: any,sorter: any,name='orderBy')=>{
   Object.keys(data).forEach((item)=>{
     if(item===sorter.field)params[name]=`${data[item]} ${sorter.order==='ascend'?'asc':'desc'}`;
   });
@@ -13,13 +13,13 @@ export const getTimeZone=()=>{
   return -(new Date().getTimezoneOffset()/60);
 };
 
-export const formatDate=(value,format=dateTimeFormat)=>{
+export const formatDate=(value: any,format=dateTimeFormat)=>{
   if(!value)return '';
   if(typeof value !== 'number') return moment(new Date(value)).format(format);
   return moment(new Date(value*1000)).format(format);
 };
 
-export const formatDateToUtc=(value,type)=>{
+export const formatDateToUtc=(value: any,type: any)=>{
   let date=new Date(value).getTime()/1000;
   if(type){
     let time=type==='start'?'00:00:00':'23:59:59';
@@ -29,38 +29,38 @@ export const formatDateToUtc=(value,type)=>{
   return Math.round(date);
 };
 
-export const compareDate=(start,end,day=365)=>{//比较两个日期是否相差多少天，默认365
+export const compareDate=(start: any,end: any,day=365)=>{//比较两个日期是否相差多少天，默认365
   if(!start || !end) return true;
   let time=day*24*60*60*1000;
   let dValue=Math.abs(new Date(start).getTime()-new Date(end).getTime());
   return time>dValue;
 };
 
-export const titleCase=(str)=>{
+export const titleCase=(str: any)=>{
   if(!str)return '';
   let arr = str.toLowerCase().split(" ");
   for (let i=0;i<arr.length;i++){
     let char = arr[i].charAt(0);
-    arr[i] = arr[i].replace(char, function replace(char){
+    arr[i] = arr[i].replace(char, function replace(char: any){
       return char.toUpperCase();
     });
   }
   return arr.join(' ');
 };
 
-export const statusArrToValueFunc=(value,data,key='dictValue',label='description')=>{
+export const statusArrToValueFunc=(value: any,data: any,key='dictValue',label='description')=>{
   if(!value && value!==0)return '';
-  let index=data.findIndex((item)=>item[key]===value||Number(item[key])===value);
+  let index=data.findIndex((item: any)=>item[key]===value||Number(item[key])===value);
   return index>-1?data[index][label]:'';
 };
 
-export const statusArrToValueSfFunc=(value,data,key='dictKey',label='dictValue')=>{
+export const statusArrToValueSfFunc=(value: any,data: any,key='dictKey',label='dictValue')=>{
   if((!value && value!==0) || !data)return '';
-  let index=data.findIndex((item)=>item[key]===value||Number(item[key])===value);
+  let index=data.findIndex((item: any)=>item[key]===value||Number(item[key])===value);
   return index>-1?data[index][label]:'';
 };
 
-export const startToEndTime=(startTime,endTime)=>{
+export const startToEndTime=(startTime: any,endTime: any)=>{
   let timeDiff = endTime - startTime
   const hour = Math.floor(timeDiff / 3600);
   timeDiff = timeDiff % 3600;
@@ -71,7 +71,7 @@ export const startToEndTime=(startTime,endTime)=>{
   return dataContent
 };
 
-export const blobToDownloadExcel=(data,title,fileType='xls')=>{
+export const blobToDownloadExcel=(data: any,title: any,fileType='xls')=>{
   let blob = new Blob([data], {type: 'application/octet-stream;charset=utf-8'});
   if(window.navigator && window.navigator.msSaveOrOpenBlob){
     window.navigator.msSaveOrOpenBlob(blob, `${title}.${fileType}`);
@@ -88,27 +88,27 @@ export const blobToDownloadExcel=(data,title,fileType='xls')=>{
   window.URL.revokeObjectURL(url);
 };
 
-export const fetchInformationImage = fileId => {
+export const fetchInformationImage = (fileId: any) => {
   return `/ss-utilitycenter/v1/file/thumbnail/${fileId}`;
 };
 
-export const fetchInformationBigImage = fileId => {
+export const fetchInformationBigImage = (fileId: any) => {
   return `/ss-utilitycenter/v1/file/download/${fileId}`;
 };
 
-export const compare = (x, y) => {
+export const compare = (x: any, y: any) => {
   return x.date > y.date;
 };
 
-export const getPath = (data) =>{
-  let pathVal=[];
-  let forFunc=(arr, pathVal)=>{
-    arr.forEach((item)=>{
+export const getPath = (data: any) =>{
+  let pathVal: any=[];
+  let forFunc=(arr: any, pathVal: any)=>{
+    arr.forEach((item: any)=>{
       if(item.children && item.children.length){
         forFunc(item.children, pathVal);
       }else {
         pathVal.push(item.routePath);
-        (item.permissionList || []).forEach((list)=>{
+        (item.permissionList || []).forEach((list: any)=>{
           pathVal.push(list.permissionCode);
         });
       }
@@ -118,10 +118,10 @@ export const getPath = (data) =>{
   return pathVal;
 };
 
-export const getMenu = (data) =>{
-  let pathVal=[];
-  let forFunc=(arr, pathVal, type, name=[])=>{
-    arr.forEach((item)=>{
+export const getMenu = (data: any) =>{
+  let pathVal: any=[];
+  let forFunc=(arr: any, pathVal: any, type: any, name: any=[])=>{
+    arr.forEach((item: any)=>{
       let nameValue=[];
       if(type==='start'){
         nameValue=[item.assetName];
@@ -139,16 +139,16 @@ export const getMenu = (data) =>{
   return pathVal;
 };
 
-export const addHtmlFormat = value => {
+export const addHtmlFormat = (value: any) => {
   return (
     `<!DOCTYPE html>
         <html lang="en">
          <head>
             <meta charset="utf-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta name="viewport" content="width=device-width: any, initial-scale=1" />
             <title>保时捷资讯</title>
             <style>
-            html,body{
+            html: any,body{
               height: 100%;
               margin: 0;
               padding: 0;
@@ -168,8 +168,8 @@ export const addHtmlFormat = value => {
               border-left: solid 1px #eee;
               word-wrap:break-word;
             }
-            .container img,
-            .container audio,
+            .container img: any,
+            .container audio: any,
             .container video{
               max-width: 100%;
               height: auto;

@@ -6,7 +6,7 @@ const webpack = require('webpack');
 // npx webpack --config webpack.config.js
 module.exports = {
   mode: 'production',
-  // devtool: 'cheap-module-eval-source-map',
+  devtool: 'cheap-module-eval-source-map',
   entry: {
     pui: './src/index.js'
   },
@@ -23,20 +23,20 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".sass", ".scss"]
   },
-  externals: {
-    react: {  // /^react\/.+$/,
-      commonjs: 'react',
-      commonjs2: 'react',
-      amd: 'react',
-      root: 'react'
-    },
-    lodash : {
-      commonjs: 'lodash',
-      commonjs2: 'lodash',
-      amd: 'lodash',
-      root: '_'
-    }
-  },
+  // externals: {
+  //   react: {  // /^react\/.+$/,
+  //     commonjs: 'react',
+  //     commonjs2: 'react',
+  //     amd: 'react',
+  //     root: 'react'
+  //   },
+  //   lodash : {
+  //     commonjs: 'lodash',
+  //     commonjs2: 'lodash',
+  //     amd: 'lodash',
+  //     root: '_'
+  //   }
+  // },
   module: {
     rules: [{
       test: /\.css$/,
@@ -95,7 +95,7 @@ module.exports = {
      * (or babel-preset-es2015, babel-preset-es2016, and babel-preset-es2017 together).
      */
     {
-      test: /\.(js|jsx)$/,
+      test: /\.jsx?$/,
       exclude: /(node_modules|bower_components)/,
       use: {
         loader: 'babel-loader',
@@ -104,8 +104,15 @@ module.exports = {
         }
       }
     }, {
-      test: /\.(ts|tsx)$/,
-      use: 'ts-loader'
+      test: /\.tsx?$/,
+      use: [
+        {
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true
+          }
+        }
+      ]
     }
     // , {
     //   test: /\.html$/,

@@ -11,16 +11,18 @@ import {titleCase} from './utils/common';
 export const history = createBrowserHistory();
 export const hashHistory = createHashHistory();
 
+export const ppnLoginUrl = process.env.NODE_ENV==='development' ? 'https://ppnlite.porsche.com/ppnmda/login.do': 'https://ppn.porsche.com/ppnmda/login.do';
+
 // the authorize algorithm goes here
-export const authorized = (allowed, currentRole) => includes(allowed, currentRole);
+export const authorized = (allowed: any, currentRole: any) => includes(allowed, currentRole);
 
 export const queryObject = () => {
-  let codeData = {};
+  let codeData: any = {};
   window.location.search.replace(/([^?&=]+)=([^&]+)/g, (_, k, v) => codeData[k] = v);
   return codeData;
 };
 
-const axiosInstance = axios.create({
+const axiosInstance: any = axios.create({
   baseURL: baseUrl,
   timeout: 5000,
   withCredentials: true,
@@ -31,7 +33,7 @@ const axiosInstance = axios.create({
   // }
 });
 
-axiosInstance.interceptors.request.use(function (config) {
+axiosInstance.interceptors.request.use(function (config: any) {
   // 在发送请求之前做些什么
   let headers=Object.assign({},config.headers,{
     Authorization: window.localStorage.getItem(USER_TOKEN)  // token
@@ -40,11 +42,11 @@ axiosInstance.interceptors.request.use(function (config) {
     config.baseURL='';
   }
   return Object.assign({},config,{headers});
-}, function (error) {
+}, function (error: any) {
   return Promise.reject(error);
 });
 
-axiosInstance.interceptors.response.use(function (response) {
+axiosInstance.interceptors.response.use(function (response: any) {
   // 对响应数据做点什么
   let refreshToken=response.headers["x-access-token"];
   let tokenType=response.headers["x-token-type"];
@@ -53,11 +55,11 @@ axiosInstance.interceptors.response.use(function (response) {
     window.localStorage.setItem(USER_TOKEN ,`${titleCase(tokenType)} ${refreshToken}`);
   }
   return response;
-}, function (error) {
+}, function (error: any) {
   return Promise.reject(error);
 });
 
-export const toQueryParam = (queryParams) => {
+export const toQueryParam = (queryParams: any) => {
   const params = new URLSearchParams();
   Object.keys(queryParams).forEach(key => {
     if (queryParams[key]) {
@@ -75,8 +77,8 @@ export const api = {
    * @param: queryParams
    * ...: responseType/
    */
-  request: (argu) => {
-    let config = {};
+  request: (argu: any) => {
+    let config: any = {};
     const {url, method, queryParams, data, ...rest}=argu;
     if (!argu.url) {
       throw new Error('No request url');
@@ -95,10 +97,10 @@ export const api = {
     config = Object.assign({},config,{...rest});
 
     return axiosInstance.request(config)
-      .then((res) => {
+      .then((res: any) => {
         return Promise.resolve(res.data);
       })
-      .catch(err => {
+      .catch((err: any) => {
         if (err.response) {
           if (err.response.data && err.response.data.code) {
             if(err.response.data.code === 401 ){
@@ -121,7 +123,7 @@ export const api = {
       });
   },
 
-  get: (url, queryParams = {}, config) => {
+  get: (url: string, queryParams = {}, config?: any) => {
     return api.request({
       url: url,
       queryParams: queryParams,
@@ -129,7 +131,7 @@ export const api = {
     });
   },
 
-  post: (url, data, config, queryParams = {}) => {
+  post: (url: string, data?: any, config?: any, queryParams = {}) => {
     return api.request({
       url: url,
       method: 'post',
@@ -139,7 +141,7 @@ export const api = {
     });
   },
 
-  put: (url, data, config) => {
+  put: (url: string, data: any, config?: any) => {
     return api.request({
       url: url,
       method: 'put',
@@ -148,7 +150,7 @@ export const api = {
     });
   },
 
-  del: (url, data, config) => {
+  del: (url: string, data: any, config?: any) => {
     return api.request({
       url: url,
       method: 'delete',
@@ -158,7 +160,7 @@ export const api = {
   },
 
   // Be careful to use this function
-  changeGlobalAxiosInstance: (params) => {
+  changeGlobalAxiosInstance: (params: any) => {
     Object.keys(params).forEach(element => {
       axiosInstance.defaults[element] = params[element];
     });

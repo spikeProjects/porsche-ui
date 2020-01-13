@@ -7,7 +7,7 @@ const {
 } = asyncActionCreator('UPDATE_ACCOUNT');
 
 export const fetchAccount = () => {
-  return (dispatch) => {
+  return (dispatch: any) => {
     // return api.get('/api/account')
     //   .then((data: any) => {
     //     let params: any = queryObject();
@@ -30,4 +30,3 @@ export const fetchAccount = () => {
     });
   };
 };
-
