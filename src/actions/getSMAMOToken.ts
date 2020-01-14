@@ -8,7 +8,7 @@ const local = window.localStorage;
 const clientId = 'PC019802';
 const userCode = local.getItem(USER_CODE);
 let jsonStr = undefined;
-export const getSMAMOToken =()=> (dispatch: any)  => {
+export const getSMAMOToken = (argu: any)=> (dispatch: any)  => {
   const sessionCode = queryObject().code;
 
   const getter = function() {

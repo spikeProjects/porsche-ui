@@ -5,7 +5,10 @@ import {USER_PROFILE, USER_TOKEN} from '../constants/navigationConstants';
 import {getRoleName} from '../constants/roles';
 import {logout} from '../actions'
 
-export interface propTypes {}
+export interface propTypes {
+  firstName: string,
+  dispatch: Function
+}
 class Account extends Component<propTypes, any> {
   static propTypes = {};
 

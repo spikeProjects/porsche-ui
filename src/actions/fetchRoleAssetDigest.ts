@@ -1,5 +1,4 @@
-import {MENU_ASSET_NAME} from '../constants/globalConstants';
-import {GET_ROLE_ASSET_DIGEST, FETCH_MENU_ASSET, PATH_ALL} from '../constants/navigationConstants';
+import {MENU_ASSET_NAME, GET_ROLE_ASSET_DIGEST, FETCH_MENU_ASSET, PATH_ALL} from '../constants/navigationConstants';
 import {getPath, getMenu} from '../utils/common';
 import {api} from "../helper";
 

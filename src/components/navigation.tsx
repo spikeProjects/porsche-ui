@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {get} from 'lodash';
 
+import {history} from '../helper';
 import {getSMAMOToken}from '../actions/getSMAMOToken';
-import {PorMenu} from '../kits/porMenu';
+import PorMenu from '../kits/porMenu';
 import Account from './account';
-import {MENU_ASSET_ITEM} from '../constants/navigationConstants'
+import {USER_TOKEN, CODE_TOLEN, MENU_ASSET_ITEM, MENU_ASSET_NAME, FETCH_MENU_ASSET} from '../constants/navigationConstants';
 
 export interface NavigationProps {
   menu:any,
@@ -17,9 +18,6 @@ export interface NavigationProps {
   tokenCallback: any,
 }
 
-export const USER_TOKEN = 'userToken-getToken';
-export const CODE_TOLEN = 'CODE_TOLEN';
-
 const LStorage = window.localStorage;
 const SStorage = window.sessionStorage;
 class Navigation extends React.Component<NavigationProps, object> {
@@ -29,7 +27,9 @@ class Navigation extends React.Component<NavigationProps, object> {
     super(props);
     this.handleMenuClick=this.handleMenuClick.bind(this);
     this.state = {
-      account: {}
+      account: {},
+      checkedMenuCode:null,
+      scroll:false,
     }
   };
 
@@ -41,9 +41,40 @@ class Navigation extends React.Component<NavigationProps, object> {
       });
       tokenCallback(profile);
     });
+
+    history.listen((route: any)=>{
+      let menuItem=window.localStorage.getItem(MENU_ASSET_ITEM);
+      if(menuItem !== null){
+        let path=menuItem?JSON.parse(menuItem).routePath:null;
+        if(route.pathname.indexOf(path)!==0){
+          let menuData=window.localStorage.getItem(MENU_ASSET_NAME);
+          if(menuData !== null){
+            let currentData=JSON.parse(menuData);
+            let currentDataItem=currentData.find((item:any)=>route.pathname.indexOf(`/pc${item.routePath}`)===0);
+            if(currentDataItem){
+              let [first, ...rest]=currentDataItem.currentMenu;
+              let pathAll=window.localStorage.getItem(FETCH_MENU_ASSET);
+              if(pathAll !== null){
+                JSON.parse(pathAll).forEach((item:any)=>{
+                  if(item.assetName === first){
+                    this.setState({
+                      checkedMenuCode:item.assetCode
+                    });
+                  }
+                })
+              }
+              window.localStorage.setItem(MENU_ASSET_ITEM, JSON.stringify({
+                routePath:currentDataItem.routePath,
+                currentMenu:rest
+              }));
+            }
+          }
+        }
+      }
+    });
   }
 
-  renderMenu(item:any):any{
+  renderMenu(item:any) {
     if(item.children.length===0) {
       return <PorMenu.Item
         key={item.assetCode}

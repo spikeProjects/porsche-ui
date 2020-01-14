@@ -1,0 +1,50 @@
+@import '../../styles/variables';
+
+.page-backdrop{
+  width: 100%;
+  background: $white;
+}
+.page-backdrop-gray{
+  width: 100%;
+  background: $grayDark
+}
+.page-backdrop-dark{
+  width: 100%;
+  background: $dark
+}
+.page-backdrop-search{
+  width: 100%;
+  background: $graySearch
+}
+.page-backdrop-content{
+  margin: 0 auto;
+}
+@media screen and (min-width: 1760px){
+  .page-backdrop{
+    min-width: 1920px;
+    box-sizing: border-box;
+  }
+  .page-backdrop-content{
+    padding: 0 192px;
+  }
+}
+@media screen and (min-width: 1300px) and (max-width: 1759px){
+  .page-backdrop{
+    min-width: 1550px;
+  }
+  .page-backdrop-content{
+    width: 1550px;
+    padding: 0 95px;
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 1299px){
+  .page-backdrop{
+    min-width: 1172px;
+  }
+  .page-backdrop-content{
+    width: 1172px;
+    padding: 0 74px;
+    box-sizing: border-box;
+  }
+}

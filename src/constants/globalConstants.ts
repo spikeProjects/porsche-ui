@@ -67,7 +67,6 @@ export const DASH_BOARD_ROLE = [
     PCN_CONNECT
 ];
 
-export const MENU_ASSET_NAME='pc-currentMenu-name-all';
 
 // export default {
 //     ALL,

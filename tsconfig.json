@@ -2,7 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "outDir": "./dist/",
-    "jsx": "preserve",
+    "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "module": "es6",
     "noImplicitAny": true,
@@ -11,10 +11,12 @@
     "sourceMap": true,
     "target": "es5",
     "moduleResolution": "node",
-    "allowJs": true
+    "allowJs": true,
+    "types": ["react"]
   },
   "files": [
-    "./src/index.js"
+    "./src/index.js",
+    "./typings/index.d.ts"
   ],
   "include": [
     "src/**/*",

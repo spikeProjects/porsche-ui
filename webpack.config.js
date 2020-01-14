@@ -103,7 +103,12 @@ module.exports = {
           presets: ['@babel/preset-env', '@babel/preset-react']
         }
       }
-    }, {
+    },
+    // {
+    //   test: /\.tsx?$/,
+    //   use: ['awesome-typescript-loader' ]
+    // }
+    {
       test: /\.tsx?$/,
       use: [
         {
@@ -114,10 +119,10 @@ module.exports = {
         }
       ]
     }
-    // , {
-    //   test: /\.html$/,
-    //   loader: 'html-loader'
-    // }
+    , {
+      test: /\.html$/,
+      loader: 'html-loader'
+    }
     ]
   },
   plugins: [

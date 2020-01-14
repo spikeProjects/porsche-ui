@@ -13,3 +13,7 @@ export const USER_PROFILE = 'user-profile';
 
 export const USER_ID = 'user-id';
 export const USER_CLIENT_ID = 'user-client-id';
+export const MENU_ASSET_NAME = 'currentMenu-name-all';
+
+// TODO
+export const IS_LOADING = 'IS_LOADING';

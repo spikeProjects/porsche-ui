@@ -13,21 +13,47 @@ import {
   api
 } from './helper';
 
+import {
+  Account,
+  PageBackdrop,
+  Header,
+  Navigation
+} from './components';
+
 class Welcome extends Component {
   render() {
     return <div>
-      <h2>Welcome to Porsche UI react
-        <img className="what" src={require('./assets/svg/add.svg')} />
-        <img className="here" src={require("./assets/images/porscheIcon.png")} />
-      </h2>
+      <h2>Welcome to Porsche UI react</h2>
     </div>
   }
 }
+ReactDOM.render(
+  <Welcome />
+  , document.getElementById('root')
+);
 
 export default {
   // actions
   getSMAMOToken,
   fetchAccount,
+
+  // actions
+  getSMAMOToken,
+  fetchAccount,
+
+  //kits
+  PorMenu,
+  // components
+  Account,
+  PageBackdrop,
+  Header,
+  Navigation,
+  // helpers
+  asyncActionCreator,
+  fetchRoleAssetDigest,
+  queryObject,
+  toQueryParam,
+  api,
 
   asyncActionCreator,
   fetchRoleAssetDigest,
@@ -37,6 +63,9 @@ export default {
   api
 };
 
-ReactDOM.render(
-  <Welcome />
-, document.getElementById('root'));
+export {
+  Account,
+  PageBackdrop,
+  Header,
+  Navigation,
+}
