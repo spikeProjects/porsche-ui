@@ -21,48 +21,43 @@ import {
 } from './components';
 
 class Welcome extends Component {
+  
   render() {
+    console.log(PorMenu);
+
     return <div>
       <h2>Welcome to Porsche UI react</h2>
     </div>
   }
 }
-ReactDOM.render(
-  <Welcome />
-  , document.getElementById('root')
-);
 
+// TODO: remove before releasex
+// ReactDOM.render(
+//   <Welcome />
+//   , document.getElementById('box')
+// );
+
+// helpers
 export default {
-  // actions
-  getSMAMOToken,
-  fetchAccount,
-
-  // actions
-  getSMAMOToken,
-  fetchAccount,
-
-  //kits
-  PorMenu,
-  // components
-  Account,
-  PageBackdrop,
-  Header,
-  Navigation,
-  // helpers
   asyncActionCreator,
   fetchRoleAssetDigest,
   queryObject,
   toQueryParam,
   api,
-
-  asyncActionCreator,
-  fetchRoleAssetDigest,
-  PorMenu,
-  queryObject,
-  toQueryParam,
-  api
 };
 
+// actions
+export {
+  getSMAMOToken,
+  fetchAccount,
+}
+
+//kits
+export {
+  PorMenu,
+}
+
+// components
 export {
   Account,
   PageBackdrop,

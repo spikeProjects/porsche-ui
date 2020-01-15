@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
 
-export default class PorMenu extends Component {
+class Menu extends Component {
   static propTypes = {
     onClick: PropTypes.func,
     checkedMenuCode:PropTypes.string
@@ -129,13 +129,13 @@ export default class PorMenu extends Component {
                 <div key={item.key || index}>
                   {
                     !item.props.title ? (
-                      <PorMenu.Item
+                      <Item
                         handleItemClick={this.handleItemClick}
                         baseName={item.key}
                         className={item.key===checkedMenuCode && item.key!==hoverValue?'isChecked':''}
                       >
                         {item.props}
-                      </PorMenu.Item>
+                      </Item>
                     ):(
                       <div className="item" onMouseEnter={()=>this.handleMouseEnter(item, item.key)} onMouseLeave={this.handleMouseLeave}>
                         <div className={item.key === hoverValue?'isHover':''}>
@@ -144,7 +144,7 @@ export default class PorMenu extends Component {
                         </div>
                         {
                           item.key === hoverValue &&
-                          <PorMenu.SubMenu
+                          <SubMenu
                             index={0}
                             hoverValue={hoverValue}
                             firstValue={firstValue}
@@ -155,7 +155,7 @@ export default class PorMenu extends Component {
                             baseName={item.key}
                           >
                             {item.props.children}
-                          </PorMenu.SubMenu>
+                          </SubMenu>
                         }
                       </div>
                     )
@@ -169,7 +169,7 @@ export default class PorMenu extends Component {
   }
 }
 
-PorMenu.SubMenu= props =>{
+const SubMenu = props =>{
   const {index, hoverValue, firstValue, hoverAllValue, title, handleIMenuMouseEnter, handleItemClick, baseName}=props;
   return (
     <div className="menu-pop-up" style={{top:`${index===0?'69':'-1'}px`,left:`${238*index}px`}}>
@@ -200,7 +200,7 @@ PorMenu.SubMenu= props =>{
                     </div>
                     {
                       hoverAllValue.some((value)=>value===item.key) &&
-                      <PorMenu.SubMenu
+                      <SubMenu
                         index={1}
                         hoverValue={hoverValue}
                         firstValue={firstValue}
@@ -211,7 +211,7 @@ PorMenu.SubMenu= props =>{
                         baseName={baseName}
                       >
                         {item.props.children}
-                      </PorMenu.SubMenu>
+                      </SubMenu>
                     }
                   </Fragment>
               }
@@ -223,7 +223,7 @@ PorMenu.SubMenu= props =>{
   )
 };
 
-PorMenu.Item= props =>{
+const Item = props =>{
   const {baseName, className} = props;
   return (
     <div className="item item-parent" onClick={(e)=>props.handleItemClick(e, {props:props.children}, props.children.children)}>
@@ -240,3 +240,9 @@ PorMenu.Item= props =>{
     </div>
   );
 };
+
+export default {
+  Menu,
+  SubMenu,
+  Item
+}

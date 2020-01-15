@@ -23,20 +23,20 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".sass", ".scss"]
   },
-  // externals: {
-  //   react: {  // /^react\/.+$/,
-  //     commonjs: 'react',
-  //     commonjs2: 'react',
-  //     amd: 'react',
-  //     root: 'react'
-  //   },
-  //   lodash : {
-  //     commonjs: 'lodash',
-  //     commonjs2: 'lodash',
-  //     amd: 'lodash',
-  //     root: '_'
-  //   }
-  // },
+  externals: {
+    react: {  // /^react\/.+$/,
+      commonjs: 'react',
+      commonjs2: 'react',
+      amd: 'react',
+      root: 'react'
+    },
+    lodash : {
+      commonjs: 'lodash',
+      commonjs2: 'lodash',
+      amd: 'lodash',
+      root: '_'
+    }
+  },
   module: {
     rules: [{
       test: /\.css$/,
