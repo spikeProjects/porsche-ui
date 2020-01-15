@@ -1,6 +1,10 @@
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+// const extractCSS = new ExtractTextPlugin('stylesheets/[name]-css.css');
+// const extractSASS = new ExtractTextPlugin('stylesheets/[name]-sass.css');
 const webpack = require('webpack');
 
 // npx webpack --config webpack.config.js
@@ -41,13 +45,17 @@ module.exports = {
     rules: [{
       test: /\.css$/,
       use: ['style-loader', 'css-loader']
+      // use: extractCSS.extract({
+      //   fallback: "style-loader",
+      //   use: "css-loader"
+      // })
     }, {
       test: /\.(scss|sass)$/,
-      use: [
-        "style-loader", // creates style nodes from JS strings
-        "css-loader", // translates CSS into CommonJS
-        "sass-loader" // compiles Sass to CSS
-      ]
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        //如果需要，可以在 sass-loader 之前将 resolve-url-loader 链接进来
+        use: ['css-loader', 'sass-loader']
+      })
     }
     /* , {
         test: /\.less$/,
@@ -126,6 +134,18 @@ module.exports = {
     ]
   },
   plugins: [
+    // new ExtractTextPlugin('style.css'),
+    new ExtractTextPlugin({
+      filename: (getPath) => {
+        return 'style.css'
+      },
+      // filename:  (getPath) => {
+      //   return getPath('css/[name].css').replace('css/js', 'css');
+      // },
+      allChunks: true
+    }),
+    // extractCSS,
+    // extractSASS,
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       title: 'Development',
